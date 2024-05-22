@@ -1,3 +1,3 @@
 # ClassicAlgorithms
 
-Classic algorithms implemented in Python.
+Classic algorithms and data structures implemented in Python.
