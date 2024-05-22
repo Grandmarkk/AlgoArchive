@@ -1,5 +1,4 @@
-import numpy as np
+from search.binary_search import binary_search
 
-from search import binary_search
-
-print(binary_search.binary_search([1,2,3], 5))
+if __name__ == "__main__":
+    print(binary_search([1,2,3,10,23], 10))
