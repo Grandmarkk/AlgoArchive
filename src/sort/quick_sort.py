@@ -4,6 +4,8 @@ def quick_sort(ary, start=None, end=None):
 
     Args:
         ary: an array
+    
+    Return: the sorted array
     '''
     start = 0 if not isinstance(start, (int, float)) else start
     end = len(ary) - 1 if not isinstance(end, (int, float)) else end
@@ -21,6 +23,8 @@ def partition(ary, start, end):
         ary: an array
         start: the start index
         end: the end index
+
+    Return: the pivot's sorted index
     '''
     pivot = start
     index = pivot + 1

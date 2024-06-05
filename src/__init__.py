@@ -1,5 +1,5 @@
-from search.binary_search import binary_search
-from sort.quick_sort import quick_sort
+import sort
+import sort.merge_sort
 
 if __name__ == "__main__":
-    print(quick_sort([1,4,1,76,4,14,5,1,1,3,67,8,32]))
+    print(sort.merge_sort.merge_sort([1,2,3,4,23,1,56,34,8,3,78534,123,3]))
