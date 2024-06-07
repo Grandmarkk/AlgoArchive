@@ -10,5 +10,5 @@ if __name__ == "__main__":
     bst.insert(4)
     bst.insert(6)
     bst.insert(6)
-    bst.delete(3)
+    bst.delete(5)
     print(bst.traversal())

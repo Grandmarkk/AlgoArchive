@@ -56,13 +56,9 @@ class BST:
             else:
                 # Node with only one child or no child
                 if node.left is None:
-                    temp = node.right
-                    node = None
-                    return temp
+                    return node.right
                 elif node.right is None:
-                    temp = node.left
-                    node = None
-                    return temp
+                    return node.left
                 # Node with two children:
                 temp = minValueNode(node.right)
                 node.key = temp.key
