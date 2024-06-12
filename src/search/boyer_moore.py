@@ -1,4 +1,6 @@
-def getR(pattern: str):
+from search.z_algorithm import z_algo
+
+def computeR(pattern: str):
     '''
     build Ri for bad character rule
     '''
@@ -34,11 +36,11 @@ def getR(pattern: str):
     return rVals
 
 
-def getGS(pattern: str):
+def computeGS(pattern: str):
     '''
     build good suffix array
     '''
-    zSfx = getZ(pattern[::-1])[::-1]
+    zSfx = z_algo(pattern[::-1])[::-1]
     m = len(pattern)
     gs = []
     for i in range(m + 1):
@@ -49,12 +51,12 @@ def getGS(pattern: str):
     return gs
     
 
-def getMP(pattern: str):
+def computeMP(pattern: str):
     '''
     build matched prefix array
     '''
     m = len(pattern)
-    z = getZ(pattern)
+    z = z_algo(pattern)
     mp = [0] * (m + 1)
     i = len(mp) - 2
     curMax = z[i - 1]
@@ -70,11 +72,11 @@ def getMP(pattern: str):
     return mp
 
 
-def boyerMoore(text: str, pattern: str):
+def boyer_moore(text: str, pattern: str):
     ans = []
-    r = getR(pattern)
-    gs = getGS(pattern)
-    mp = getMP(pattern)
+    r = computeR(pattern)
+    gs = computeGS(pattern)
+    mp = computeMP(pattern)
     m = len(pattern)
     n = len(text)
     tIndex = m - 1
@@ -95,6 +97,3 @@ def boyerMoore(text: str, pattern: str):
             pIndex -= 1
     return ans
 
-pattern = "wn"
-text = "mmomqmpwncbxqtzbfgtrduuneeiwiclaypajvzrezxalchdsctgjyebqwbods"
-print(boyerMoore(text, pattern))
