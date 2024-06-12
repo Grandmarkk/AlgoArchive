@@ -73,6 +73,15 @@ def computeMP(pattern: str):
 
 
 def boyer_moore(text: str, pattern: str):
+    '''
+    Find exact pattern match
+
+    Args:
+        text: text sample
+        pattern: pattern string
+    
+    Return: list of match starting positions
+    '''
     ans = []
     r = computeR(pattern)
     gs = computeGS(pattern)
