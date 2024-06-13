@@ -3,7 +3,7 @@ import sort
 from tree.binary_search_tree import BST, BST_Node
 from tree.b_tree import BTree
 from search.boyer_moore import boyer_moore
-from encode import elias
+from encode import huffman
 
 if __name__ == "__main__":
 
@@ -31,5 +31,5 @@ if __name__ == "__main__":
     print(boyer_moore(text, pattern))
 
     # test encoding
-    codeword = elias.encode(4)
-    print(elias.decode(codeword))
+    codeword = huffman.generate_code_table("Hello")
+    print(codeword)
