@@ -1,6 +1,8 @@
+
 class Binary_Heap:
     def __init__(self):
         self.heap = []
+        self.key_set = set()  # To keep track of the keys in the heap
 
     def get_min(self):
         return self.heap[0] if self.heap else None
@@ -9,33 +11,42 @@ class Binary_Heap:
         if len(self.heap) == 0:
             return None
         if len(self.heap) == 1:
-            return self.heap.pop()
+            min_value = self.heap.pop()
+            self.key_set.remove(min_value)
+            return min_value
         
         root = self.heap[0]
         self.heap[0] = self.heap.pop()  # Move the last element to the root
+        self.key_set.remove(root)
         self._heapify_down(0)  # Fix the heap property from the root down
         return root
 
-    def decrease_key(self, index, new_val):
-        if index >= len(self.heap):
+    def decrease_key(self, old_key, new_key):
+        if old_key not in self.key_set:
+            print(f"Key {old_key} not found in the heap.")
             return
-        
-        self.heap[index] = new_val
-        self._heapify_up(index)  # Fix the heap property from the given index up
+        if new_key in self.key_set:
+            print(f"Key {new_key} already exists in the heap. Decrease key skipped.")
+            return
+
+        index = self.heap.index(old_key)
+        self.heap[index] = new_key
+        self.key_set.remove(old_key)
+        self.key_set.add(new_key)
+        self._heapify_up(index)
 
     def insert(self, key):
+        if key in self.key_set:
+            print(f"Key {key} already exists in the heap. Insertion skipped.")
+            return
         self.heap.append(key)
+        self.key_set.add(key)
         self._heapify_up(len(self.heap) - 1)  # Fix the heap property from the last element up
 
-    def delete(self, index):
-        if index >= len(self.heap):
-            return
-        
-        # Replace the element to be deleted with the last element
-        self.heap[index] = self.heap.pop()
-        if index < len(self.heap):
-            self._heapify_up(index)
-            self._heapify_down(index)
+    def delete(self, key):
+        if key in self.key_set:
+            self.decrease_key(key, self.heap[0] - 1)
+            self.extract_min()
 
     def _heapify_up(self, index):
         parent_index = (index - 1) // 2
@@ -57,8 +68,3 @@ class Binary_Heap:
         if smallest != index:
             self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
             self._heapify_down(smallest)
-
-    def heapify(self):
-        n = len(self.heap)
-        for i in range(n // 2 - 1, -1, -1):
-            self._heapify_down(i)
