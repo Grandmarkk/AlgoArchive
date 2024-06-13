@@ -25,6 +25,10 @@ class suffix_tree:
         self.build_suffix_tree(text)
 
     def build_suffix_tree(self, text):
+        '''
+        Build suffix tree for the input text using Ukkonen's algorithm.
+        input text must end with '$'
+        '''
         self.root.suffix_link = self.root
         # Initialse the active node to root
         active_node = self.root
