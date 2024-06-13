@@ -3,6 +3,7 @@ import sort
 from tree.binary_search_tree import BST, BST_Node
 from tree.b_tree import BTree
 from search.boyer_moore import boyer_moore
+from tree.binary_heap import Binary_Heap
 
 if __name__ == "__main__":
     root = BST_Node(3)
@@ -25,3 +26,5 @@ if __name__ == "__main__":
     pattern = "aba"
     text = "abaabababa"
     print(boyer_moore(text, pattern))
+
+    
