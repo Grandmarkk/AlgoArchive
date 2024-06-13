@@ -16,7 +16,7 @@ def generate_code_table(text):
     def cmp(item):
         return item[1]
     
-    def traverseHuffmanTree(root, code, table):
+    def traverse_huffman_tree(root, code, table):
         '''
         Traverse the tree to get the encoding for each char
         '''
@@ -27,25 +27,25 @@ def generate_code_table(text):
         right = code[::]
         left.append('0')
         right.append('1')
-        traverseHuffmanTree(root.left, left, table)
-        traverseHuffmanTree(root.right, right, table)
+        traverse_huffman_tree(root.left, left, table)
+        traverse_huffman_tree(root.right, right, table)
 
     # calc frequency
     freq = {}
     for char in text:
         freq[char] = 1 + freq.get(char, 0)
     # sort the dict on the frequency
-    sortedChar = sorted(freq.items(), key = cmp)
+    sorted_char = sorted(freq.items(), key = cmp)
     # build tree
-    rightNode = Huffman_Node(sortedChar[0][0])
-    for i in range(1, len(sortedChar)):
-        leftNode = Huffman_Node(sortedChar[i][0])
-        newNode = Huffman_Node(leftNode.text + rightNode.text)
-        newNode.left = leftNode
-        newNode.right = rightNode
-        rightNode = newNode
-    root = newNode
+    right_node = Huffman_Node(sorted_char[0][0])
+    for i in range(1, len(sorted_char)):
+        left_node = Huffman_Node(sorted_char[i][0])
+        new_node = Huffman_Node(left_node.text + right_node.text)
+        new_node.left = left_node
+        new_node.right = right_node
+        right_node = new_node
+    root = new_node
     # build code table
-    codeTable = {}
-    traverseHuffmanTree(root, [], codeTable)
-    return codeTable
+    code_table = {}
+    traverse_huffman_tree(root, [], code_table)
+    return code_table

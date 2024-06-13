@@ -3,7 +3,7 @@ import sort
 from tree.binary_search_tree import BST, BST_Node
 from tree.b_tree import BTree
 from search.boyer_moore import boyer_moore
-from encode import huffman
+from tree.suffix_tree import suffix_tree
 
 if __name__ == "__main__":
 
@@ -25,11 +25,12 @@ if __name__ == "__main__":
         b_tree.insert(num)
     print(b_tree.traverse())
 
-    # test boyer-moore
-    pattern = "aba"
-    text = "abaabababa"
-    print(boyer_moore(text, pattern))
 
-    # test encoding
-    codeword = huffman.generate_code_table("Hello")
-    print(codeword)
+    text = "hello$"
+
+
+    # test suffix tree
+    st = suffix_tree(text)
+    a = []
+    st.build_suffix_array(st.root, len(text), a, 0)
+    print(a)

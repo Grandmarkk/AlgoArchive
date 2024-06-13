@@ -39,7 +39,7 @@ class BST:
         helper(self.root, key)
 
     def delete(self, target) -> None:
-        def minValueNode(node):
+        def min_value_node(node):
             current = node
             # Loop down to find the leftmost leaf
             while current and current.left is not None:
@@ -60,7 +60,7 @@ class BST:
                 elif node.right is None:
                     return node.left
                 # Node with two children:
-                temp = minValueNode(node.right)
+                temp = min_value_node(node.right)
                 node.key = temp.key
                 node.right = helper(node.right, temp.key)
             return node

@@ -5,12 +5,12 @@ def encode(num):
     Generate the Elias code for a given positive int
     '''
     # calc bin
-    binNum = bitarray(bin(num)[2:])
-    res = [binNum]
-    while len(binNum) > 1:
-        binNum = bitarray(bin(len(binNum) - 1)[2:])
-        binNum[0] = 0
-        res.append(binNum)
+    bin_num = bitarray(bin(num)[2:])
+    res = [bin_num]
+    while len(bin_num) > 1:
+        bin_num = bitarray(bin(len(bin_num) - 1)[2:])
+        bin_num[0] = 0
+        res.append(bin_num)
     # concat the bin stream
     code = bitarray()
     i = len(res) - 1
@@ -25,13 +25,13 @@ def decode(codeword, start=0):
 
     Output: decoded int
     '''
-    readLen = 1
-    end = start + readLen
+    read_len = 1
+    end = start + read_len
     while True:
-        cur = codeword[start : start + readLen]
+        cur = codeword[start : start + read_len]
         if cur[0] == 1:
             return int('0b' + cur.to01(), 2)
         cur[0] = 1
-        start += readLen
-        readLen = int('0b' + cur.to01(), 2) + 1
-        end += readLen
+        start += read_len
+        read_len = int('0b' + cur.to01(), 2) + 1
+        end += read_len
