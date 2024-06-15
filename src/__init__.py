@@ -4,6 +4,7 @@ from tree.binary_search_tree import BST, BST_Node
 from tree.b_tree import BTree
 from search.boyer_moore import boyer_moore
 from tree.suffix_tree import suffix_tree
+from encode import lz77
 
 if __name__ == "__main__":
 
@@ -34,3 +35,9 @@ if __name__ == "__main__":
     a = []
     st.build_suffix_array(st.root, len(text), a, 0)
     print(a)
+
+    # test LZ77
+    codeword = lz77.encode("aabacababc", 7, 5)
+    print("codeword: ", codeword)
+    decoded = lz77.decode(codeword)
+    print(decoded)
