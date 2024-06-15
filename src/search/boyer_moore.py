@@ -1,6 +1,6 @@
 from search.z_algorithm import z_algo
 
-def computeR(pattern: str):
+def compute_r(pattern: str):
     '''
     build Ri for bad character rule
     '''
@@ -36,7 +36,7 @@ def computeR(pattern: str):
     return rVals
 
 
-def computeGS(pattern: str):
+def compute_good_suffix(pattern: str):
     '''
     build good suffix array
     '''
@@ -51,7 +51,7 @@ def computeGS(pattern: str):
     return gs
     
 
-def computeMP(pattern: str):
+def compute_matched_preffix(pattern: str):
     '''
     build matched prefix array
     '''
@@ -83,9 +83,9 @@ def boyer_moore(text: str, pattern: str):
     Return: list of match starting positions
     '''
     ans = []
-    r = computeR(pattern)
-    gs = computeGS(pattern)
-    mp = computeMP(pattern)
+    r = compute_r(pattern)
+    gs = compute_good_suffix(pattern)
+    mp = compute_matched_preffix(pattern)
     m = len(pattern)
     n = len(text)
     tIndex = m - 1
