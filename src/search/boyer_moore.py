@@ -2,20 +2,13 @@ from search.z_algorithm import z_algo
 
 def compute_r(pattern: str):
     '''
-    build Ri for bad character rule
-    '''
+    Build R for bad character rule.
+    R[i] stores the right most char indexes in pattern[0:i]
 
-    '''
-    
-    rVals = []
-    m = len(pattern)
-    rVals.append({})
-    for i in range(1, m):
-        ri = {}
-        for j in range(i):
-            ri[pattern[j]] = j
-        rVals.append(ri)
-    return rVals
+    Args:
+        pattern: a string
+
+    Return: a list of dictionary
     '''
     m = len(pattern)
     rVals = [{}]
@@ -38,7 +31,7 @@ def compute_r(pattern: str):
 
 def compute_good_suffix(pattern: str):
     '''
-    build good suffix array
+    Build good suffix array.
     '''
     zSfx = z_algo(pattern[::-1])[::-1]
     m = len(pattern)
@@ -53,7 +46,7 @@ def compute_good_suffix(pattern: str):
 
 def compute_matched_preffix(pattern: str):
     '''
-    build matched prefix array
+    Build matched prefix array.
     '''
     m = len(pattern)
     z = z_algo(pattern)
@@ -90,6 +83,7 @@ def boyer_moore(text: str, pattern: str):
     n = len(text)
     tIndex = m - 1
     pIndex = m - 1
+    # scan the text
     while tIndex < n and pIndex > -1:
         if not text[tIndex] == pattern[pIndex]:
             bShift = pIndex - max(r[pIndex][text[tIndex]], 1)

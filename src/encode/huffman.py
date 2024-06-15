@@ -10,8 +10,13 @@ class Huffman_Node:
 
 def generate_code_table(text):
     '''
-    Returns a dict of the Huffman codes. 
-    character : str bin code
+    Generate a Huffman binary code table for each character in the text.
+
+    Args:
+        text: string
+    
+    Return:
+        a dictionary {character : binary code}
     '''
     def cmp(item):
         return item[1]

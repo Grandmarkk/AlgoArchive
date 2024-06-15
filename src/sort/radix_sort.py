@@ -1,6 +1,13 @@
 import math
 
 def radixSort(nums, base):
+    '''
+    Sort the input array in non decreasing order.
+
+    Args:
+        nums: input array
+        base: base to sort the elements by
+    '''
     if (len(nums) < 2):
         return nums
     # find min

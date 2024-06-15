@@ -21,6 +21,14 @@ class Node:
         
 class suffix_tree:
     def __init__(self, text) -> None:
+        '''
+        Initialze the suffix tree for the input text.
+
+        Args:
+            text: a string
+        '''
+        if text[-1] != '$':
+            text = text + '$'
         self.root = Node(None, None)
         self.build_suffix_tree(text)
 
@@ -28,6 +36,9 @@ class suffix_tree:
         '''
         Build suffix tree for the input text using Ukkonen's algorithm.
         input text must end with '$'
+
+        Args: 
+            text: a string
         '''
         self.root.suffix_link = self.root
         # Initialse the active node to root

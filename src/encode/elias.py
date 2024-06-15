@@ -3,6 +3,12 @@ from bitarray import bitarray
 def encode(num):
     '''
     Generate the Elias code for a given positive int
+
+    Args:
+        num: a positive integer
+
+    Return:
+        a bitarray of Elias code
     '''
     # calc bin
     bin_num = bitarray(bin(num)[2:])
@@ -23,7 +29,11 @@ def decode(codeword, start=0):
     '''
     Decodes the Elias code in a bitarray from the start
 
-    Output: decoded int
+    Args:
+        codeword: a bitarray of Elias code
+        start: the index to start decoding
+
+    Return: decoded int
     '''
     read_len = 1
     end = start + read_len

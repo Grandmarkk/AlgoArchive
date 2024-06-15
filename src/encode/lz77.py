@@ -1,4 +1,15 @@
 def encode(text, dictionary_size, buffer_size):
+    '''
+    Compress the input text using LZ77.
+
+    Args:
+        text: string
+        dictionary_size: the size of the search window
+        buffer_size: the size of the look-ahead buffer
+
+    Return:
+        a list of tuples [(offset, length, next-character)]
+    '''
     i = 0
     encoded_output = []
     while i < len(text):
@@ -16,6 +27,15 @@ def encode(text, dictionary_size, buffer_size):
     return encoded_output
 
 def decode(codeword):
+    '''
+    Restore the string from LZ77 code.
+
+    Args:
+        codeword: a list of tuples [(offset, length, next-character)]
+    
+    Return:
+        a string
+    '''
     decoded_output = []
     curLen = 0
     for offset, length, next_char in codeword:
