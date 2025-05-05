@@ -1,3 +1,3 @@
 # AlgoArchive
 
-Classic algorithms and data structures implemented in Python.
+Classic algorithms and data structures implemented in different languages.
