@@ -70,3 +70,68 @@ vector<int> insertionSort(vector<int> arr)
     }
     return arr;
 }
+
+/**
+ * Merge 2 sorted array.
+ */
+vector<int> merge(vector<int> arr1, vector<int> arr2)
+{
+    vector<int> res;
+    int idx1 = 0;
+    int idx2 = 0;
+
+    while (idx1 < arr1.size() && idx2 < arr2.size())
+    {
+        if (arr1[idx1] <= arr2[idx2])
+        {
+            res.push_back(arr1[idx1]);
+            idx1++;
+        }
+        else
+        {
+            res.push_back(arr2[idx2]);
+            idx2++;
+        }
+    }
+
+    while (idx1 < arr1.size())
+    {
+        res.push_back(arr1[idx1]);
+        idx1++;
+    }
+
+    while (idx2 < arr2.size())
+    {
+        res.push_back(arr2[idx2]);
+        idx2++;
+    }
+
+    return res;
+}
+
+vector<int> mergeSort(vector<int> arr)
+{
+    if (arr.size() < 2)
+    {
+        return arr;
+    }
+
+    int mid = arr.size() / 2;
+    vector<int> left;
+    vector<int> right;
+
+    for (int i = 0; i < mid; i++)
+    {
+        left.push_back(arr[i]);
+    }
+
+    for (int i = mid; i < arr.size(); i++)
+    {
+        right.push_back(arr[i]);
+    }
+
+    left = mergeSort(left);
+    right = mergeSort(right);
+
+    return merge(left, right);
+}
