@@ -49,3 +49,24 @@ vector<int> selectionSort(vector<int> arr)
     }
     return arr;
 }
+
+vector<int> insertionSort(vector<int> arr)
+{
+    int left = 1;
+    int right = arr.size() - 1;
+    while (left <= right)
+    {
+        int i = left - 1;
+        int cur = arr[left];
+        // Find place to insert
+        while (i >= 0 && arr[i] > cur)
+        {
+            arr[i + 1] = arr[i];
+            i--;
+        }
+        // Insert
+        arr[i + 1] = cur;
+        left++;
+    }
+    return arr;
+}
