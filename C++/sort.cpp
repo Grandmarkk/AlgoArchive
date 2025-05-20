@@ -3,7 +3,7 @@
 
 using namespace std;
 
-vector<int> bubbleSort(vector<int> arr)
+void bubbleSort(vector<int> &arr)
 {
     int length = arr.size();
     for (int i = 0; i < length; i++)
@@ -22,13 +22,12 @@ vector<int> bubbleSort(vector<int> arr)
         }
         if (!swaped)
         {
-            return arr;
+            return;
         }
     }
-    return arr;
 }
 
-vector<int> selectionSort(vector<int> arr)
+void selectionSort(vector<int> &arr)
 {
     int left = 0;
     int right = arr.size() - 1;
@@ -47,10 +46,9 @@ vector<int> selectionSort(vector<int> arr)
         swap(arr[minIdx], arr[left]);
         left++;
     }
-    return arr;
 }
 
-vector<int> insertionSort(vector<int> arr)
+void insertionSort(vector<int> &arr)
 {
     int left = 1;
     int right = arr.size() - 1;
@@ -68,13 +66,12 @@ vector<int> insertionSort(vector<int> arr)
         arr[i + 1] = cur;
         left++;
     }
-    return arr;
 }
 
 /**
  * Merge 2 sorted array.
  */
-vector<int> merge(vector<int> arr1, vector<int> arr2)
+vector<int> merge(vector<int> &arr1, vector<int> &arr2)
 {
     vector<int> res;
     int idx1 = 0;
@@ -109,7 +106,7 @@ vector<int> merge(vector<int> arr1, vector<int> arr2)
     return res;
 }
 
-vector<int> mergeSort(vector<int> arr)
+vector<int> mergeSort(vector<int> &arr)
 {
     if (arr.size() < 2)
     {
@@ -134,4 +131,37 @@ vector<int> mergeSort(vector<int> arr)
     right = mergeSort(right);
 
     return merge(left, right);
+}
+
+int partition(vector<int> &arr, int start, int end)
+{
+    int pivot = arr[start];
+    while (start < end)
+    {
+        // Find the first elm < pivot from the right
+        while (start < end && arr[end] >= pivot)
+        {
+            end--;
+        }
+        arr[start] = arr[end];
+        // Find the first elm > pivot from the left
+        while (start < end && arr[start] <= pivot)
+        {
+            start++;
+        }
+        arr[end] = arr[start];
+    }
+    // Put pivot in place
+    arr[start] = pivot;
+    return start;
+}
+
+void quickSort(vector<int> &arr, int start, int end)
+{
+    if (start < end)
+    {
+        int pivot = partition(arr, start, end);
+        quickSort(arr, start, pivot - 1);
+        quickSort(arr, pivot + 1, end);
+    }
 }
