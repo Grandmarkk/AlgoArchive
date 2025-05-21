@@ -165,3 +165,37 @@ void quickSort(vector<int> &arr, int start, int end)
         quickSort(arr, pivot + 1, end);
     }
 }
+
+vector<int> countingSort(vector<int> arr)
+{
+    // Find range
+    int minNum = arr[0];
+    int maxNum = arr[0];
+    int length = 0;
+    for (int num : arr)
+    {
+        minNum = min(minNum, num);
+        maxNum = max(maxNum, num);
+        length++;
+    }
+    vector<int> counts(maxNum - minNum + 1, 0);
+    // Count frequency
+    for (int num : arr)
+    {
+        counts[num - minNum]++; // Offset the min num to 0
+    }
+    // Construct sorted array
+    vector<int> sortedArr(length);
+    int i = 0;
+
+    for (int num = 0; num < maxNum - minNum + 1; num++)
+    {
+        for (int freq = counts[num]; freq > 0; freq--)
+        {
+            sortedArr[i] = num + minNum;
+            i++;
+        }
+    }
+
+    return sortedArr;
+}

@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    vector<int> testArr = {1, 0, 4, 2, 5, 3, 7, 9, 6};
+    vector<int> testArr = {0, 1, 0, 4, 2, 5, 3, 7, 9, 6, 6};
     quickSort(testArr, 0, testArr.size() - 1);
     for (int i : testArr)
     {
