@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -198,4 +199,55 @@ vector<int> countingSort(vector<int> arr)
     }
 
     return sortedArr;
+}
+
+vector<int> radixSort(vector<int> arr, int base)
+{
+    // Get range
+    int minNum = arr[0];
+    int maxNum = arr[0];
+    for (int num : arr)
+    {
+        minNum = min(minNum, num);
+        maxNum = max(maxNum, num);
+    }
+    // Shift to positive
+    if (minNum < 0)
+    {
+        for (int i = 0; i < arr.size(); i++)
+        {
+            arr[i] += -minNum;
+        }
+    }
+    // Cal columns
+    int cols = floor(log(maxNum) / log(base)) + 1;
+    int divider = 1;
+    while (cols-- > 0)
+    {
+        // Counting sort
+        vector<vector<int>> counts(base);
+        for (int num : arr)
+        {
+            counts[num / divider % base].push_back(num);
+        }
+        int i = 0;
+        for (vector<int> bucket : counts)
+        {
+            for (int num : bucket)
+            {
+                arr[i] = num;
+                i++;
+            }
+        }
+        divider *= base;
+    }
+    // Shift Back
+    if (minNum < 0)
+    {
+        for (int i = 0; i < arr.size(); i++)
+        {
+            arr[i] -= -minNum;
+        }
+    }
+    return arr;
 }
