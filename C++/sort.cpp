@@ -201,7 +201,7 @@ vector<int> countingSort(vector<int> arr)
     return sortedArr;
 }
 
-vector<int> radixSort(vector<int> arr, int base)
+vector<int> radixSort(vector<int> &arr, int base)
 {
     // Get range
     int minNum = arr[0];
@@ -219,8 +219,13 @@ vector<int> radixSort(vector<int> arr, int base)
             arr[i] += -minNum;
         }
     }
-    // Cal columns
-    int cols = floor(log(maxNum) / log(base)) + 1;
+    // Get max digits
+    int cols = 1;
+    while (maxNum > 0)
+    {
+        cols++;
+        maxNum /= base;
+    }
     int divider = 1;
     while (cols-- > 0)
     {

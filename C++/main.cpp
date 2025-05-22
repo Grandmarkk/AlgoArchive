@@ -8,12 +8,13 @@ using namespace std;
 
 int main()
 {
-    vector<int> testArr = {0, 1, 0, 4, 2, 5, 3, 7, 9, 6, 6};
-    quickSort(testArr, 0, testArr.size() - 1);
+    vector<int> testArr = {0, -10, 0, 4, 2, 5, 23, 7, 9, 6, 6};
+    testArr = radixSort(testArr, 5);
     for (int i : testArr)
     {
         cout << i << " ";
     }
+
     cout << endl;
     return 0;
 }
