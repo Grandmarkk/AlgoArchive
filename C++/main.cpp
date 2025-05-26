@@ -3,16 +3,22 @@
 #include <string.h>
 #include <iostream>
 #include "sort.cpp"
+#include "tree.cpp"
+#include "heap.cpp"
 
 using namespace std;
 
 int main()
 {
-    vector<int> testArr = {0, -10, 0, 4, 2, 5, 23, 7, 9, 6, 6};
-    testArr = radixSort(testArr, 5);
-    for (int i : testArr)
+    vector<int> testArr = {2, 3, 1, 5, 64, 2, 8};
+    MaxHeap *myHeap = new MaxHeap(testArr);
+    myHeap->push(100);
+    myHeap->push(2);
+    cout << myHeap->size() << endl;
+    while (!myHeap->empty())
     {
-        cout << i << " ";
+        cout << myHeap->top() << ' ';
+        myHeap->pop();
     }
 
     cout << endl;
