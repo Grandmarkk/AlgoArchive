@@ -2,6 +2,53 @@
 
 class MaxHeap
 {
+public:
+    MaxHeap()
+    {
+        count = 0;
+        content = {};
+    }
+
+    MaxHeap(std::vector<int> arr)
+    {
+        count = arr.size();
+        content = arr;
+        buildHeap();
+    }
+
+    int top()
+    {
+        return count > 0 ? content[0] : -1;
+    }
+
+    void pop()
+    {
+        if (count > 0)
+        {
+            count--;
+            content[0] = content[count];
+            content.pop_back();
+            heapifyDown(0);
+        }
+    }
+
+    void push(int val)
+    {
+        count++;
+        content.push_back(val);
+        heapifyUp(count - 1);
+    }
+
+    bool empty()
+    {
+        return count == 0;
+    }
+
+    int size()
+    {
+        return count;
+    }
+
 private:
     int count;
     std::vector<int> content;
@@ -62,52 +109,5 @@ private:
             heapifyDown(index);
             index--;
         }
-    }
-
-public:
-    MaxHeap()
-    {
-        count = 0;
-        content = {};
-    }
-
-    MaxHeap(std::vector<int> arr)
-    {
-        count = arr.size();
-        content = arr;
-        buildHeap();
-    }
-
-    int top()
-    {
-        return count > 0 ? content[0] : -1;
-    }
-
-    void pop()
-    {
-        if (count > 0)
-        {
-            count--;
-            content[0] = content[count];
-            content.pop_back();
-            heapifyDown(0);
-        }
-    }
-
-    void push(int val)
-    {
-        count++;
-        content.push_back(val);
-        heapifyUp(count - 1);
-    }
-
-    bool empty()
-    {
-        return count == 0;
-    }
-
-    int size()
-    {
-        return count;
     }
 };

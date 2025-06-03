@@ -24,70 +24,6 @@ public:
 
 class BST
 {
-private:
-    int elmNum;
-
-    int heightHelper(TreeNode *root)
-    {
-        if (!root)
-        {
-            return 0;
-        }
-        return 1 + std::max(heightHelper(root->left), heightHelper(root->right));
-    }
-
-    TreeNode *removeHelper(TreeNode *root, int val)
-    {
-        if (!root)
-        {
-            return nullptr; // Base case: Node not found
-        }
-
-        if (val < root->val)
-        {
-            root->left = removeHelper(root->left, val); // Recur on the left subtree
-        }
-        else if (val > root->val)
-        {
-            root->right = removeHelper(root->right, val); // Recur on the right subtree
-        }
-        else
-        {
-            // Node to be deleted found
-            if (!root->left && !root->right)
-            {
-                // Case 1: No children (leaf node)
-                delete root;
-                elmNum--;
-                return nullptr;
-            }
-            else if (!root->left)
-            {
-                // Case 2: Only right child
-                TreeNode *temp = root->right;
-                delete root;
-                elmNum--;
-                return temp;
-            }
-            else if (!root->right)
-            {
-                // Case 3: Only left child
-                TreeNode *temp = root->left;
-                delete root;
-                elmNum--;
-                return temp;
-            }
-            else
-            {
-                // Case 4: Two children
-                int maxVal = max(root->left);                  // Find the max value in the left subtree
-                root->val = maxVal;                            // Replace the value of the current node
-                root->left = removeHelper(root->left, maxVal); // Remove the max value node
-            }
-        }
-        return root; // Return the updated subtree
-    }
-
 public:
     TreeNode *root;
 
@@ -206,5 +142,69 @@ public:
     void remove(int val)
     {
         this->root = removeHelper(this->root, val);
+    }
+
+private:
+    int elmNum;
+
+    int heightHelper(TreeNode *root)
+    {
+        if (!root)
+        {
+            return 0;
+        }
+        return 1 + std::max(heightHelper(root->left), heightHelper(root->right));
+    }
+
+    TreeNode *removeHelper(TreeNode *root, int val)
+    {
+        if (!root)
+        {
+            return nullptr; // Base case: Node not found
+        }
+
+        if (val < root->val)
+        {
+            root->left = removeHelper(root->left, val); // Recur on the left subtree
+        }
+        else if (val > root->val)
+        {
+            root->right = removeHelper(root->right, val); // Recur on the right subtree
+        }
+        else
+        {
+            // Node to be deleted found
+            if (!root->left && !root->right)
+            {
+                // Case 1: No children (leaf node)
+                delete root;
+                elmNum--;
+                return nullptr;
+            }
+            else if (!root->left)
+            {
+                // Case 2: Only right child
+                TreeNode *temp = root->right;
+                delete root;
+                elmNum--;
+                return temp;
+            }
+            else if (!root->right)
+            {
+                // Case 3: Only left child
+                TreeNode *temp = root->left;
+                delete root;
+                elmNum--;
+                return temp;
+            }
+            else
+            {
+                // Case 4: Two children
+                int maxVal = max(root->left);                  // Find the max value in the left subtree
+                root->val = maxVal;                            // Replace the value of the current node
+                root->left = removeHelper(root->left, maxVal); // Remove the max value node
+            }
+        }
+        return root; // Return the updated subtree
     }
 };

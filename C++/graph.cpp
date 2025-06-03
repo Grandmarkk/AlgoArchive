@@ -28,8 +28,6 @@ public:
  */
 class GraphL
 {
-private:
-    unordered_set<GraphNode *> nodes;
 
 public:
     GraphL()
@@ -131,4 +129,7 @@ public:
         }
         return dists;
     }
+
+private:
+    unordered_set<GraphNode *> nodes;
 };
