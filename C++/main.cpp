@@ -27,7 +27,7 @@ int main()
     cout << endl;
 
     string ts = "ababaca";
-    vector<int> out = kmp(ts, "aba");
+    vector<int> out = buildZ(ts);
 
     return 0;
 }

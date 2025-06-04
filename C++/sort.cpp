@@ -70,7 +70,7 @@ void insertionSort(vector<int> &arr)
 }
 
 /**
- * Merge 2 sorted array.
+ * @brief Merge 2 sorted array.
  */
 vector<int> merge(vector<int> &arr1, vector<int> &arr2)
 {
@@ -134,6 +134,13 @@ vector<int> mergeSort(vector<int> &arr)
     return merge(left, right);
 }
 
+/**
+ * @brief Put the pivot to its sorted position
+ * @param arr the source array
+ * @param start left index of the sub-array
+ * @param end right index of the sub-array
+ * @return the sorted pivot index
+ */
 int partition(vector<int> &arr, int start, int end)
 {
     int pivot = arr[start];
@@ -167,7 +174,7 @@ void quickSort(vector<int> &arr, int start, int end)
     }
 }
 
-vector<int> countingSort(vector<int> arr)
+vector<int> countingSort(vector<int> &arr)
 {
     // Find range
     int minNum = arr[0];
@@ -201,6 +208,12 @@ vector<int> countingSort(vector<int> arr)
     return sortedArr;
 }
 
+/**
+ * @brief Sort the input array
+ * @param arr the reference of the array
+ * @param base the radix
+ * @return the sorted array
+ */
 vector<int> radixSort(vector<int> &arr, int base)
 {
     // Get range

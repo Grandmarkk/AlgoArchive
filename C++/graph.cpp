@@ -6,6 +6,9 @@
 
 using namespace std;
 
+/**
+ * @brief A simple class representing a graph node
+ */
 class GraphNode
 {
 public:
@@ -24,7 +27,7 @@ public:
 };
 
 /**
- * Graph represented in adjacency list
+ * @brief Graph represented in adjacency list
  */
 class GraphL
 {

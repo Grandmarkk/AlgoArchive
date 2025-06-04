@@ -1,5 +1,8 @@
 #include <vector>
 
+/**
+ * @brief Class representing a binary tree node
+ */
 class TreeNode
 {
 public:
@@ -22,6 +25,9 @@ public:
     }
 };
 
+/**
+ * @brief Binary search tree
+ */
 class BST
 {
 public:

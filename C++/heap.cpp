@@ -1,5 +1,8 @@
 #include <vector>
 
+/**
+ * @brief A simple max heap
+ */
 class MaxHeap
 {
 public:
