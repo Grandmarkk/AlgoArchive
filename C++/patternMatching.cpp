@@ -4,10 +4,13 @@
 using namespace std;
 
 /**
- * Build the Longest Prefix Suffix array
+ * @brief The Longest Prefix Suffix array
  *
+ * @param pattern a string
+ * @return an int vector lps, lps[i] represent the length of the longest proper prefix and suffix at pattern[i]
+ * @note use with kmp()
  */
-vector<int> buildLPS(string pattern)
+vector<int> buildLPS(string &pattern)
 {
     vector<int> lps(pattern.size(), 0);
     int prev = 0;
@@ -35,7 +38,13 @@ vector<int> buildLPS(string pattern)
     return lps;
 }
 
-vector<int> kmp(string text, string pattern)
+/**
+ * @brief Search the occurence of pattern in the text
+ *
+ * @param text the haystack
+ * @param pattern the beedle
+ */
+vector<int> kmp(string &text, string &pattern)
 {
     vector<int> lps = buildLPS(pattern);
     vector<int> res;
@@ -66,4 +75,36 @@ vector<int> kmp(string text, string pattern)
         }
     }
     return res;
+}
+
+/**
+ * @brief Gusfield's Z-Algorithm
+ * @param text a string
+ * @return an array of z values, the length of the longest substring at each position that matches the prefix of text
+ */
+vector<int> buildZ(string &text)
+{
+    int len = text.size();
+    vector<int> zVals(len, 0);
+    int l = 0, r = 0;
+    for (int i = 1; i < len; ++i)
+    {
+        // Within Z-box
+        if (i <= r)
+        {
+            zVals[i] = min(r - i + 1, zVals[i - l]);
+        }
+        // Compare explicitly
+        while (i + zVals[i] < len && text[zVals[i]] == text[i + zVals[i]])
+        {
+            ++zVals[i];
+        }
+        // Update Z-box bounds
+        if (i + zVals[i] - 1 > r)
+        {
+            l = i;
+            r = i + zVals[i] - 1;
+        }
+    }
+    return zVals;
 }
