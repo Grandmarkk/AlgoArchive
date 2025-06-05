@@ -1,5 +1,7 @@
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -42,7 +44,7 @@ vector<int> buildLPS(string &pattern)
  * @brief Search the occurence of pattern in the text
  *
  * @param text the haystack
- * @param pattern the beedle
+ * @param pattern the needle
  */
 vector<int> kmp(string &text, string &pattern)
 {
@@ -107,4 +109,54 @@ vector<int> buildZ(string &text)
         }
     }
     return zVals;
+}
+
+/**
+ * @brief Build the R value matrix.
+ * m[i] is a map storing the right most occurence of each char upto text[i]
+ * @param pattern a string
+ * @return R matrix, a vector of a hash map
+ * @note used for bad character rule in BM
+ */
+vector<unordered_map<char, int>> buildR(string &pattern)
+{
+    int len = pattern.size();
+    vector<unordered_map<char, int>> rm;
+    unordered_map<char, int> cur;
+
+    rm.push_back(cur);
+
+    for (int i = 1; i < len; i++)
+    {
+        cur[pattern[i - 1]] = i - 1;
+        rm.push_back(cur);
+    }
+
+    return rm;
+}
+
+/**
+ * @brief Build the good suffix table
+ * @param pattern a string
+ * @return an int vector containing the good suffix values
+ * @note used for good suffix rule for BM
+ */
+vector<int> buildGS(string &pattern)
+{
+    // Build Z-suffix array
+    reverse(pattern.begin(), pattern.end());
+    vector<int> zs = buildZ(pattern);
+    reverse(zs.begin(), zs.end());
+
+    // Build good suffix array
+    int len = pattern.size();
+    vector<int> gs(len + 1, -1);
+
+    for (int i = 0; i < len - 1; i++)
+    {
+        int j = len - zs[i];
+        gs[j] = i;
+    }
+
+    return gs;
 }

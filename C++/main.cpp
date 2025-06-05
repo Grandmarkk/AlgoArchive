@@ -26,8 +26,8 @@ int main()
     auto temp = testGraph->dijkstra(n1);
     cout << endl;
 
-    string ts = "ababaca";
-    vector<int> out = buildZ(ts);
-
+    string ts = "acababacaba";
+    string p = "ab";
+    auto gs = buildGS(ts);
     return 0;
 }
