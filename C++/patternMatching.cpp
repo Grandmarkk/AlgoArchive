@@ -160,3 +160,26 @@ vector<int> buildGS(string &pattern)
 
     return gs;
 }
+
+/**
+ * @brief Build the matched prefix array
+ * @param pattern the string pattern
+ * @return mp[i] indicates the longest prefix match to the right of i
+ */
+vector<int> buildMP(string &pattern)
+{
+    vector<int> zVals = buildZ(pattern);
+    int i = pattern.size() - 1;
+    vector<int> res(i + 2, 0);
+    res[0] = i + 1;
+    int curMax = zVals[i];
+
+    while (i > 0)
+    {
+        curMax = max(curMax, zVals[i]);
+        res[i] = curMax;
+        --i;
+    }
+
+    return res;
+}
